@@ -21,7 +21,7 @@ namespace Tangles
         {
 
         }
-        public Rectangle( double length, double width, int x, int y )
+        public Rectangle(double length, double width, int x, int y)
         {
             this.Length = length;
             this.Width = width;
@@ -59,10 +59,10 @@ namespace Tangles
         {
             if (Contains(rec)) { return false; }
             double xDiff = Math.Abs(this.Center.x - rec.Center.x);
-            bool xOverlapping = xDiff < ( Length/2 + rec.Length/2 );
+            bool xOverlapping = xDiff < (Length / 2 + rec.Length / 2);
 
             double yDiff = Math.Abs(this.Center.y - rec.Center.y);
-            bool yOverlapping = yDiff < ( Width/2 + rec.Width/2 );
+            bool yOverlapping = yDiff < (Width / 2 + rec.Width / 2);
 
             return xOverlapping && yOverlapping;
         }
@@ -72,8 +72,8 @@ namespace Tangles
         }
         private bool ContainsPoint(Point point)
         {
-            bool xIn = ( this.OriginCorner.x <= point.x ) && ( point.x <= this.OppositeCorner.x );
-            bool yIn = ( this.OriginCorner.y <= point.y ) && ( point.y <= this.OppositeCorner.y );
+            bool xIn = (this.OriginCorner.x <= point.x) && (point.x <= this.OppositeCorner.x);
+            bool yIn = (this.OriginCorner.y <= point.y) && (point.y <= this.OppositeCorner.y);
             return xIn && yIn;
         }
         public List<Line> IsAdjacentAt(Rectangle rec)
@@ -97,10 +97,18 @@ namespace Tangles
         }
         public List<Point> IntersectsAt(Rectangle rec)
         {
-            return new List<Point> { new Point(1, 2) };
+            List<Point> result = new List<Point>();
+            foreach (Line lineA in Sides)
+            {
+                foreach (Line lineB in rec.Sides)
+                {
+                    if (lineA.Intersects(lineB))
+                    {
+                        result.Add(lineA.IntersectionPoint(lineB));
+                    }
+                }
+            }
+            return result;
         }
-
-
-        
     }
 }

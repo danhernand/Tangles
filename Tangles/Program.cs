@@ -13,7 +13,7 @@ namespace Tangles
             while (true)
             {
                 uint input;
-                Console.WriteLine("Welcome to Tangles, your bi-rectangle geometric engine.  We will take in the length, width and the coordinates of the origin-oriented corner for two rectangles and let you know if they intersect, contain or are adjacent to one another.");
+                Console.WriteLine("Welcome to Tangles!  Put in the length, width and the coordinates of the origin-oriented corner for two rectangles and know if they intersect, contain or are adjacent to one another.");
                 Console.WriteLine("\nNow Let's build our first rectangle!");
                 Console.WriteLine("Press any key to continue\n");
                 Console.ReadKey();
@@ -94,8 +94,8 @@ namespace Tangles
                 if (a.Intersects(b))
                 {
                     var intersectingPoints = a.IntersectsAt(b);
-                    var output = new StringBuilder("Rectangles intersect at ");
-                    intersectingPoints.ForEach(p => output.Append(p.ToString().PadRight(1)));
+                    var output = new StringBuilder("Rectangles intersect at: \n");
+                    intersectingPoints.ForEach(p => output.Append(p.ToString() + "\n"));
                     Console.WriteLine(output);
                 }
                 Console.WriteLine("Rectangles are adjacent: {0}", a.IsAdjacentTo(b));
